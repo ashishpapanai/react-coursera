@@ -2,7 +2,8 @@ import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-function RenderLeader({leader}){
+function RenderLeader({leader}){  
+    {/* Renders leader information from leader.js*/}
     return(
         <div class="media mb-4 mt-4">
             <img class="align-self-start mr-3" src={leader.image} alt="Generic placeholder image" />
@@ -15,6 +16,7 @@ function RenderLeader({leader}){
     )
 }
 function About(props) {
+    {/* Renders leader information from leader.js*/}
     const leaders = props.leaders.map((leader) => {
         return (
             <RenderLeader leader={leader}/>
