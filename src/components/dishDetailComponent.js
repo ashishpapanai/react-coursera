@@ -17,7 +17,7 @@ function RenderDish({ dish }) {
     );
 }
 
-function RenderComments({ comments }) {
+function RenderComments({ comments, addComment, dishId }) {
     if (comments == null || comments.length == 0) {
         return (<div></div>);
     } else {
@@ -33,7 +33,7 @@ function RenderComments({ comments }) {
                     )
                     )}
                 </ul>
-                <CommentForm />
+                <CommentForm dishId={dishId} addComment={addComment} />
             </div>
         )
     }
@@ -58,7 +58,9 @@ class CommentForm extends Component {
         });
     }
     handleSubmit(values) {
-        alert(JSON.stringify(values));
+        this.toggleModal();
+        console.log()
+        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
     }
 
     render() {
@@ -129,39 +131,34 @@ class CommentForm extends Component {
 }
 
 const DishDetail = (props) => {
-    return (
-        props.dish == null
-            ?
-            (
-                <div></div>
-            )
-            :
-            (
-                <div className="container">
-                    <div className="row">
-                        <Breadcrumb>
-                            <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
-                            <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
-                            <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
-                        </Breadcrumb>
-                        <div className="col-12">
-                            <h3>{props.dish.name}</h3>
-                            <hr />
-                        </div>
+    if (props.dish != null) {
+        return (
+            <div className="container">
+                <div className="row">
+                    <Breadcrumb>
+                        <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
+                        <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+                    </Breadcrumb>
+                    <div className="col-12">
+                        <h3>{props.dish.name}</h3>
+                        <hr />
                     </div>
-                    <div className="row">
-                        <div className="col-lg-5 col-md-5 col-sm-12 m-1">
-                            <RenderDish dish={props.dish} />
-                        </div >
-                        <div className="col-lg-5 col-md-5 col-sm-12 m-1">
-                            <RenderComments comments={props.comments} />
-                        </div>
-                    </div >
                 </div>
-            )
-    );
-}
+                <div className="row">
+                    <div className="col-12 col-md-5 m-1">
+                        <RenderDish dish={props.dish} />
+                    </div>
+                    <div className="col-12 col-md-5 m-1">
+                        <RenderComments comments={props.comments}
+                            addComment={props.addComment}
+                            dishId={props.dish.id} />
+                    </div>
+                </div>
+            </div >
+        );
 
-
-
+    } else {
+        return (<div></div>);
+    }
+};
 export default DishDetail;
