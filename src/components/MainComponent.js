@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from "react";
 import Menu from "./MenuComponent";
 import Home from "./HomeComponent";
 import Contact from "./ContactComponent";
@@ -19,10 +19,10 @@ const mapStateToProps = state => {
     comments: state.comments,
     promotions: state.promotions,
     leaders: state.leaders
-  };
-};
+  }
+}
 
-class Main extends Component {
+class Main extends React.Component {
   state = {
     dishes: DISHES,
     comments: COMMENTS,
@@ -33,9 +33,9 @@ class Main extends Component {
     const HomePage = () => {
       return (
         <Home
-          dish={this.props.dishes.filter((dish) => dish.featured)[0]}
-          promotion={this.props.promotions.filter((promo) => promo.featured)[0]}
-          leader={this.props.leaders.filter((leader) => leader.featured)[0]}
+          dish={this.state.dishes.filter((dish) => dish.featured)[0]}
+          promotion={this.state.promotions.filter((promo) => promo.featured)[0]}
+          leader={this.state.leaders.filter((leader) => leader.featured)[0]}
         />
       );
     };
@@ -44,12 +44,12 @@ class Main extends Component {
       return (
         <DishDetail
           dish={
-            this.data.dishes.filter(
+            this.state.dishes.filter(
               (dish) => dish.id === parseInt(match.params.dishId, 10)
             )[0]
           }
           comments={
-            this.data.comments.filter(
+            this.state.comments.filter(
               (comment) => comment.dishId === parseInt(match.params.dishId, 10)
             )
           }
@@ -65,11 +65,11 @@ class Main extends Component {
           <Route
             exact
             path="/menu"
-            component={() => <Menu dishes={this.data.dishes} />}
+            component={() => <Menu dishes={this.state.dishes} />}
           />
           <Route path="/menu/:dishId" component={DishWithId} />
           <Route exact path="/contactus" component={Contact} />
-          <Route exact path="/aboutus" component={() => <About leaders={this.data.leaders} />} />
+          <Route exact path="/aboutus" component={() => <About leaders={this.state.leaders} />} />
           <Redirect to="/home" />
         </Switch>
         <Footer />
