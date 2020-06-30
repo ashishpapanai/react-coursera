@@ -1,4 +1,3 @@
-import { PROMOTIONS } from '../shared/promotions';
 import * as ActionTypes from './ActionsType';
 
 export const Promotions = (state = {

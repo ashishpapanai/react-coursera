@@ -25,7 +25,7 @@ function RenderDish({ dish }) {
 }
 
 function RenderComments({ comments, postComment, dishId }) {
-    if (comments == null || comments.length == 0) {
+    if (comments === null || comments.length === 0) {
         return (<div></div>);
     } else {
         return (

@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import {
   Nav, Navbar, NavbarBrand, NavbarToggler, Collapse, NavItem, Jumbotron,
-  Button, Modal, ModalHeader, ModalBorder, ModalBody, Form, FormGroup, Label, Input, Col, FormFeedback
-} from 'reactstrap';
+  Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input,} from 'reactstrap';
 import { NavLink } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -28,9 +26,7 @@ class Header extends Component {
     alert("Username: " + this.username.value + " Password: " + this.password.value
       + " Remember: " + this.remember.checked);
     event.preventDefault();
-
   }
-
   toggleModal() {
     this.setState({
       isModalOpen: !this.state.isModalOpen
